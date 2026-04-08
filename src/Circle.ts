@@ -60,17 +60,6 @@ export class Circle {
     this.centerY += y;
   }
 
-  /**
-   * Circles don't have a direction (always evaluates to zero).
-   */
-  get direction(): number {
-    return 0;
-  }
-
-  set direction(direction) {
-    // nothing to do
-  }
-
   serialized() {
     if (!this.id) {
       throw new Error('Circle ID is falsy.');

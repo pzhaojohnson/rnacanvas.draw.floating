@@ -106,26 +106,6 @@ describe('`class Circle`', () => {
     expect(Number.parseFloat(circle.domNode.getAttribute('cy'))).toBeCloseTo(90);
   });
 
-  test('`get direction()`', () => {
-    var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-
-    var circle = new Circle(domNode);
-
-    // simply returns zero
-    expect(circle.direction).toBe(0);
-  });
-
-  test('`set direction()`', () => {
-    var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-
-    var circle = new Circle(domNode);
-
-    circle.direction = 12;
-
-    // no effect
-    expect(circle.direction).toBe(0);
-  });
-
   test('`serialized()`', () => {
     var circle = Circle.create();
 
