@@ -89,7 +89,7 @@ circle.domNode.getAttribute('id').length >= 36; // true
 ```
 
 <b>All drawing elements must have a unique ID for RNAcanvas drawings to be savable
-and for undo / redo functionalitty to work.</b>
+and for undo / redo functionality to work.</b>
 
 ### `centerX`
 
