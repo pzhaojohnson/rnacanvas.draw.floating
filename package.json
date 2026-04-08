@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/draw.floating",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Draw floating elements",
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "webpack-cli": "^7.0.0"
   },
   "dependencies": {
+    "@rnacanvas/value-check": "^1.14.1",
     "jquery": "^4.0.0"
   }
 }
