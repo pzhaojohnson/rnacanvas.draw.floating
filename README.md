@@ -34,7 +34,7 @@ circle.centerX = 50;
 circle.centerY = 10;
 ```
 
-## `static create()`
+### `static create()`
 
 Creates a circle element from scratch.
 
@@ -47,7 +47,7 @@ var circle = Circle.create();
 circle.id.length >= 36; // has a UUID
 ```
 
-## `constructor()`
+### `constructor()`
 
 Creates a circle element wrapping an SVG circle element.
 
@@ -64,7 +64,7 @@ circle.domNode === domNode; // true
 This constructor is more meant for internal use
 (e.g., when recrating saved circle elements).
 
-## `readonly domNode`
+### `readonly domNode`
 
 The underlying SVG circle element corresponding to the circle element.
 
