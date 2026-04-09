@@ -11,6 +11,7 @@ export class Circle {
   static create() {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
+    // SVG IDs must begin with a letter
     domNode.id = 'id-' + self.crypto.randomUUID();
 
     domNode.setAttribute('r', '6');

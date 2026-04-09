@@ -4,6 +4,8 @@
 
 import { Circle } from './Circle';
 
+import { uuidRegex } from './uuidRegex';
+
 import { DrawingMock } from './DrawingMock';
 
 beforeAll(() => {
@@ -140,5 +142,3 @@ describe('`class Circle`', () => {
     expect(circle1.domNode).toBeTruthy();
   });
 });
-
-const uuidRegex = /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/;
