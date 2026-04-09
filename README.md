@@ -11,9 +11,241 @@ npm install @rnacanvas/draw.floating
 All exports of this package can be accessed as named imports.
 
 ```javascript
-// an example import
-import { Circle } from '@rnacanvas/draw.floating';
+// some example imports
+import { Text, Circle } from '@rnacanvas/draw.floating';
 ```
+
+## `class Text`
+
+A text element.
+
+```javascript
+var text = Text.create('A');
+
+text.domNode.textContent; // "A"
+
+// set font attributes
+text.domNode.setAttribute('font-family', 'Arial');
+text.domNode.setAttribute('font-size', '9');
+
+// set color
+text.domNode.setAttribute('fill', 'black');
+
+// set center coordinates
+text.centerX = 10;
+text.centerY = 20;
+```
+
+### `static create()`
+
+Creates a text element with specified content.
+
+```javascript
+var text = Text.create('A');
+
+text.domNode.textContent; // "A"
+```
+
+This method will assign created text elements a UUID.
+
+```javascript
+var text = Text.create('A');
+
+// text element has a UUID
+text.domNode.id.length >= 36; // true
+```
+
+Text elements can be created with empty text content.
+
+```javascript
+var text = Text.create();
+
+text.domNode.textContent; // ""
+```
+
+### `constructor()`
+
+Constructs a text element wrapping the specified SVG text element.
+
+```javascript
+var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+
+var text = new Text(domNode);
+
+text.domNode === domNode; // true
+```
+
+The input SVG text element is not modified at all during construction of a text element.
+
+This constructor is more meant for internal use
+(e.g., when recreating saved text elements).
+
+### `readonly domNode`
+
+The underlying SVG text element corresponding to a text element.
+
+```javascript
+var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+
+var text = new Text(domNode);
+
+text.domNode === domNode; // true
+```
+
+### `readonly id`
+
+The ID of the text element.
+
+Corresponds to the `id` attribute of the underlying SVG text element.
+
+```javascript
+var text = Text.create('A');
+
+text.domNode.setAttribute('id', 'id-12345');
+
+text.id; // "id-12345"
+```
+
+### `readonly bbox`
+
+The bounding box of the text element.
+
+<b>Note that this method only works correctly if the text element has been added to the document body.</b>
+
+Bounding box calculations in general only work when elements are part of the document body.
+
+```javascript
+var text = Text.create('A');
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.setAttribute('viewBox', '0 0 100 200');
+
+svg.append(text.domNode);
+
+document.body.append(svg);
+
+text.centerX = 10;
+text.centerY = 20;
+
+// leftmost coordinate
+text.bbox.x;
+
+// topmost coordinate
+text.bbox.y;
+
+text.bbox.width;
+text.bbox.height;
+```
+
+See the [Box](https://pzhaojohnson.github.io/rnacanvas.draw.floating/) class
+for a full list of bounding box methods and properties.
+
+### `centerX`
+
+Center X coordinate.
+
+<b>This property only works correctly when a text element has been added to the documnt body.</b>
+
+```javascript
+var text = Text.create('A');
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.setAttribute('viewBox', '0 0 100 200');
+
+svg.append(text.domNode);
+
+document.body.append(svg);
+
+text.centerX = 25;
+
+text.centerX; // 25
+```
+
+### `centerY`
+
+Center Y coordinate.
+
+<b>This property only works correctly when a text element has been added to the documnt body.</b>
+
+```javascript
+var text = Text.create('A');
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.setAttribute('viewBox', '0 0 100 200');
+
+svg.append(text.domNode);
+
+document.body.append(svg);
+
+text.centerY = 50;
+
+text.centerY; // 50
+```
+
+### `drag()`
+
+Shifs a text element by the specified X and Y amounts.
+
+```javascript
+var text = Text.create('A');
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.setAttribute('viewBox', '0 0 100 200');
+
+svg.append(text.domNode);
+
+document.body.append(svg);
+
+text.centerX = 10;
+text.centerY = 20;
+
+text.drag(70, 90);
+
+text.centerX; // 80;
+text.centerY; // 110
+```
+
+### `serialized()`
+
+Returns the serialized form of a strung element,
+which is a JOSN-serializable object.
+
+```javascript
+var text = Text.create('A');
+
+var savedText = text.serialized();
+```
+
+### `static recreate()`
+
+Recreates a saved text element given the parent drawing that its DOM node is in.
+
+```javascript
+var text1 = Text.create('A');
+
+// an RNAcanvas drawing
+var parentDrawing;
+
+// add the text element
+parentDrawing.domNode.append(text1.domNode);
+
+var savedText = text1.serialized();
+
+var text2 = Text.recreate(savedText, parentDrawing);
+
+// same DOM node
+text2.domNode === text1.domNode; // true
+
+// different objects
+text2 === text1; // false
+```
+
+<b>All drawing elements in RNAcanvas must have a unique ID for drawings to be savable
+and for undo / redo functionality to work.</b>
 
 ## `class Circle`
 
@@ -49,7 +281,7 @@ circle.id.length >= 36; // has a UUID
 
 ### `constructor()`
 
-Creates a circle element wrapping an SVG circle element.
+Constructs a circle element wrapping an SVG circle element.
 
 The input SVG circle element is not modified at all during construction of a circle element.
 
