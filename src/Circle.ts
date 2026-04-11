@@ -1,5 +1,7 @@
 import type { Drawing } from './Drawing';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
@@ -12,7 +14,7 @@ export class Circle {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
     // SVG IDs must begin with a letter
-    domNode.id = 'id-' + self.crypto.randomUUID();
+    domNode.id = 'id-' + uuidv4();
 
     domNode.setAttribute('r', '6');
 

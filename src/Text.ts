@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { Box } from '@rnacanvas/boxes';
 
 import { CenterPoint } from '@rnacanvas/draw.svg.text';
@@ -16,7 +18,7 @@ export class Text {
     let domNode = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 
     // SVG IDs must begin with a letter
-    domNode.id = 'id-' + self.crypto.randomUUID();
+    domNode.id = 'id-' + uuidv4();
 
     domNode.textContent = textContent ?? '';
 
