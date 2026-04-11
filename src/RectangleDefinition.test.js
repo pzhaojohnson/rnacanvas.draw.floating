@@ -1,6 +1,30 @@
 import { RectangleDefinition } from './RectangleDefinition';
 
 describe('`class RectangleDefinition`', () => {
+  test('`static matching()`', () => {
+    var d = RectangleDefinition.matching({
+      centerX: -20,
+      centerY: 29,
+
+      direction: -5 * Math.PI / 4,
+
+      width: 82,
+      height: 56,
+
+      cornerRadius: 27,
+    });
+
+    expect(d.centerX).toBe(-20);
+    expect(d.centerY).toBe(29);
+
+    expect(d.direction).toBe(-5 * Math.PI / 4);
+
+    expect(d.width).toBe(82);
+    expect(d.height).toBe(56);
+
+    expect(d.cornerRadius).toBe(27);
+  });
+
   test('`toString()`', () => {
     var d = new RectangleDefinition();
 

@@ -1,3 +1,5 @@
+import type { RectangleLike } from './RectangleLike';
+
 import { Point } from '@rnacanvas/points.oopified';
 
 export class RectangleDefinition {
@@ -13,6 +15,22 @@ export class RectangleDefinition {
   height = 0;
 
   cornerRadius = 0;
+
+  static matching(rectangle: RectangleLike): RectangleDefinition {
+    let d = new RectangleDefinition();
+
+    d.centerX = rectangle.centerX;
+    d.centerY = rectangle.centerY;
+
+    d.direction = rectangle.direction;
+
+    d.width = rectangle.width;
+    d.height = rectangle.height;
+
+    d.cornerRadius = rectangle.cornerRadius;
+
+    return d;
+  }
 
   /**
    * Returns an SVG path definition.
