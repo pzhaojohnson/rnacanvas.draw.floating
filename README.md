@@ -480,7 +480,7 @@ var rectangle = new Rectangle(domNode);
 rectangle.domNode === domNode; // true
 ```
 
-The input SVG path element is not modified in any way by this constructor.'
+The input SVG path element is not modified in any way by this constructor.
 
 This constructor is more meant for internal use
 (e.g., when recreating saved rectangle elements).
@@ -525,11 +525,11 @@ var rectangle = Rectangle.create();
 
 rectangle.centerX = 10;
 
-// is cached under the `data-center-x` attribute
+// is stored under the `data-center-x` attribute
 rectangle.domNode.dataset.centerX; // "10"
 ```
 
-This value is cached under the `data-center-x` attribute,
+This value is stored under the `data-center-x` attribute,
 which allows for watching for changes to it using mutation observers.
 
 ### `centerY`
@@ -541,11 +541,11 @@ var rectangle = Rectangle.create();
 
 rectangle.centerY = 20;
 
-// is cached under the `data-center-y` attribute
+// is stored under the `data-center-y` attribute
 rectangle.domNode.dataset.centerY; // "20"
 ```
 
-This value is cached under the `data-center-y` attribute,
+This value is stored under the `data-center-y` attribute,
 which allows for watching for changes to it using mutation observers.
 
 ### `drag()`
@@ -562,4 +562,138 @@ rectangle.drag(5, -2);
 
 rectangle.centerX; // 15
 rectangle.centerY; // 18
+```
+
+### `direction`
+
+The direction of the rectangle (in radians).
+
+```javascript
+var rectangle = Rectangle.create();
+
+// rectangles are created upright by default
+rectangle.direction; // -Math.PI / 2
+
+// "pointing" to the left
+rectangle.direction = Math.PI;
+
+// "pointing" to the right
+rectangle.direction = 0;
+
+// is stored under the `data-direction` attribute
+rectangle.domNode.dataset.direction; // "0"
+```
+
+This value is stored under the `data-direction` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `width`
+
+The width of a rectangle.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.width = 30;
+
+// is stored under the `data-width` attribute
+rectangle.domNode.dataset.width; // "30"
+```
+
+This value is stored under the `data-width` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `height`
+
+The height of a rectangle.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.height = 50;
+
+// is stored under the `data-height` attribute
+rectangle.domNode.dataset.height; // "50"
+```
+
+This value is stored under the `data-height` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `cornerRadius`
+
+Controls how rounded the corners of a rectangle are.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.cornerRadius = 5;
+
+// is stored under the `data-corner-radius` attribute
+rectangle.domNode.dataset.cornerRadius; // "5"
+```
+
+This value is stored under the `data-corner-radius` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `readonly bbox`
+
+The bounding box of a rectangle.
+
+<b>Bounding boxes can only be calculated
+when drawing elements have been added to the document body.</b>
+
+```javascript
+var rectangle = Rectangle.create();
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.append(rectangle.domNode);
+
+// add everything to the document body
+document.body.append(svg);
+
+rectangle.centerX = 0;
+rectangle.centerY = 0;
+
+rectangle.width = 10;
+rectangle.height = 20;
+
+rectangle.bbox.x; // -5
+rectangle.bbox.y; // -10
+rectangle.bbox.width; // 10
+rectangle.bbox.height; // 20
+```
+
+See [Box](https://pzhaojohnson.github.io/rnacanvas.boxes/) class documentation
+for a full list of bounding box methods and properties.
+
+### `serialized()`
+
+Returns the serialized form of a rectangle,
+which is a JSON-serializable object.
+
+```javascript
+var rectangle = Rectangle.create();
+
+var savedRectangle = rectangle.serialized();
+```
+
+### `static recreate()`
+
+Recreates a saved rectangle given the parent drawing that its DOM is in.
+
+```javascript
+var rectangle1 = Rectangle.create();
+
+var savedRectangle = rectangle1.serialized();
+
+// an RNAcanvas drawing
+parentDrawing;
+
+var rectangle2 = Rectangle.recreate(savedRectangle, parentDrawing);
+
+// share the same DOM node
+rectangle2.domNode === rectangle1.domNode; // true
+
+rectangle2 === rectangle1; // false
 ```
