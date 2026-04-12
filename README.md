@@ -680,7 +680,7 @@ var savedRectangle = rectangle.serialized();
 
 ### `static recreate()`
 
-Recreates a saved rectangle given the parent drawing that its DOM is in.
+Recreates a saved rectangle given the parent drawing that its DOM node is in.
 
 ```javascript
 var rectangle1 = Rectangle.create();
