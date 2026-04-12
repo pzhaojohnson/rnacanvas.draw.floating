@@ -12,7 +12,7 @@ All exports of this package can be accessed as named imports.
 
 ```javascript
 // some example imports
-import { Text, Circle, Rectangle } from '@rnacanvas/draw.floating';
+import { Text, Circle, Rectangle, Triangle } from '@rnacanvas/draw.floating';
 ```
 
 ## `class Text`
