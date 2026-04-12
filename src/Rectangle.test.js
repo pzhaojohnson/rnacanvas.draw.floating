@@ -421,6 +421,16 @@ describe('`class Rectangle`', () => {
 
     var savedRectangle = rectangle1.serialized();
 
+    // some properties used to be saved as JSON object properties
+    savedRectangle.width = 29.4;
+    savedRectangle.height = 54.5;
+
+    // corner radius used to be called border radius
+    savedRectangle.borderRadius = 4.82;
+
+    // direction used to correspond with rotation
+    savedRectangle.rotation = 3 * Math.PI / 2;
+
     var rectangle2 = Rectangle.recreate(savedRectangle, parentDrawing);
 
     // found DOM node
@@ -428,5 +438,14 @@ describe('`class Rectangle`', () => {
 
     expect(rectangle2.domNode).toBeTruthy();
     expect(rectangle2).not.toBe(rectangle1);
+
+    // reads in legacy properties
+    expect(rectangle2.width).toBe(29.4);
+    expect(rectangle2.height).toBe(54.5);
+
+    expect(rectangle2.cornerRadius).toBe(4.82);
+
+    // converts rotation to direction (subtracts Math.PI / 2)
+    expect(rectangle2.direction).toBeCloseTo(Math.PI);
   });
 });

@@ -10,6 +10,8 @@ import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
 
+import { isFiniteNumber } from '@rnacanvas/value-check';
+
 /**
  * A rectangle element.
  */
@@ -255,6 +257,27 @@ export class Rectangle {
       throw new Error(`DOM node found for saved rectangle is not an SVG path element: ${domNode}.`);
     }
 
-    return new Rectangle(domNode);
+    let rectangle = new Rectangle(domNode);
+
+    // some properties used to be saved as JSON object properties
+    if (isFiniteNumber(savedRectangle.width)) {
+      rectangle.width = savedRectangle.width;
+    }
+
+    if (isFiniteNumber(savedRectangle.height)) {
+      rectangle.height = savedRectangle.height;
+    }
+
+    // corner radius used to be called border radius
+    if (isFiniteNumber(savedRectangle.borderRadius)) {
+      rectangle.cornerRadius = savedRectangle.borderRadius;
+    }
+
+    // convert rotation to direction (by subtracting Math.PI / 2)
+    if (isFiniteNumber(savedRectangle.rotation)) {
+      rectangle.direction = savedRectangle.rotation - (Math.PI / 2);
+    }
+
+    return rectangle;
   }
 }
