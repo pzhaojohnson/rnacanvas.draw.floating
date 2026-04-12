@@ -12,7 +12,7 @@ All exports of this package can be accessed as named imports.
 
 ```javascript
 // some example imports
-import { Text, Circle } from '@rnacanvas/draw.floating';
+import { Text, Circle, Rectangle } from '@rnacanvas/draw.floating';
 ```
 
 ## `class Text`
@@ -429,4 +429,137 @@ var circle2 = Circle.create(savedCircle, parentDrawing);
 circle2.domNode === circle1.domNode; // true
 
 circle2 === circle1 // false
+```
+
+## `class Rectangle`
+
+A rectangle element.
+
+```javascript
+var rectangle = Rectangle.create();
+
+// set center coordinates
+rectangle.centerX = 10;
+rectangle.centerY = 20;
+
+rectangle.width = 15;
+rectangle.height = 25;
+
+// controls how rounded the corners are
+rectangle.cornerRadius = 5;
+
+// black stroke
+rectangle.domNode.setAttribute('stroke', 'black');
+rectangle.domNode.setAttribute('stroke-width', '1');
+
+// white filling
+rectangle.domNode.setAttribute('fill', 'white');
+```
+
+### `static create()`
+
+Creates a new rectangle from scratch.
+
+```javascript
+var rectangle = Rectangle.create();
+```
+
+The rectangle will be created with a UUID
+and with some default values
+(e.g., width and height, stroke and fill colors).
+
+### `constructor()`
+
+Constructs a new rectangle instance wrapping the specified SVG path element.
+
+```javascript
+var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+var rectangle = new Rectangle(domNode);
+
+rectangle.domNode === domNode; // true
+```
+
+The input SVG path element is not modified in any way by this constructor.'
+
+This constructor is more meant for internal use
+(e.g., when recreating saved rectangle elements).
+
+### `readonly domNode`
+
+The SVG path element corresponding to the rectangle element.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.domNode instanceof SVGPathElement; // true
+```
+
+### `readonly id`
+
+The ID of the rectangle.
+
+Is equal to the `id` attribute of the underlying SVG path element.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.domNode.setAttribute('id', 'id-12345');
+
+rectangle.id; // "id-12345"
+```
+
+<b>All drawing elements must have a unique ID for RNAcanvas drawings to be savable
+and for undo / redo functionality to work.</b>
+
+Note that the `create()` static method already creates rectangles with a UUID.
+
+(IDs should generally not be changed after being initialized.)
+
+### `centerX`
+
+Center X coordinate.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.centerX = 10;
+
+// is cached under the `data-center-x` attribute
+rectangle.domNode.dataset.centerX; // "10"
+```
+
+This value is cached under the `data-center-x` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `centerY`
+
+Center Y coordinate.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.centerY = 20;
+
+// is cached under the `data-center-y` attribute
+rectangle.domNode.dataset.centerY; // "20"
+```
+
+This value is cached under the `data-center-y` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `drag()`
+
+Move the center coordinates of a rectangle by the specified X and Y amounts.
+
+```javascript
+var rectangle = Rectangle.create();
+
+rectangle.centerX = 10;
+rectangle.centerY = 20;
+
+rectangle.drag(5, -2);
+
+rectangle.centerX; // 15
+rectangle.centerY; // 18
 ```
