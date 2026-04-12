@@ -1,3 +1,5 @@
+import type { TriangleLike } from './TriangleLike';
+
 import { Point } from '@rnacanvas/points.oopified';
 
 export class TriangleDefinition {
@@ -13,6 +15,22 @@ export class TriangleDefinition {
   height = 0;
 
   tailsHeight = 0;
+
+  static matching(triangle: TriangleLike): TriangleDefinition {
+    let d = new TriangleDefinition();
+
+    d.centerX = triangle.centerX;
+    d.centerY = triangle.centerY;
+
+    d.direction = triangle.direction;
+
+    d.width = triangle.width;
+    d.height = triangle.height;
+
+    d.tailsHeight = triangle.tailsHeight;
+
+    return d;
+  }
 
   /**
    * Returns an SVG path definition.

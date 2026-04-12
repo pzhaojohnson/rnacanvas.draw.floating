@@ -1,6 +1,30 @@
 import { TriangleDefinition } from './TriangleDefinition';
 
 describe('`class TriangleDefinition`', () => {
+  test('`static matching()`', () => {
+    var d = TriangleDefinition.matching({
+      centerX: -20.4,
+      centerY: 57,
+
+      direction: 0.72,
+
+      width: 25.1,
+      height: 89,
+
+      tailsHeight: 8.3,
+    });
+
+    expect(d.centerX).toBe(-20.4);
+    expect(d.centerY).toBe(57);
+
+    expect(d.direction).toBe(0.72);
+
+    expect(d.width).toBe(25.1);
+    expect(d.height).toBe(89);
+
+    expect(d.tailsHeight).toBe(8.3);
+  });
+
   test('`toString()`', () => {
     let d = new TriangleDefinition();
 
