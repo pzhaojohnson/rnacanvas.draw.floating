@@ -678,6 +678,10 @@ var rectangle = Rectangle.create();
 var savedRectangle = rectangle.serialized();
 ```
 
+Throws if the ID of the rectangle is falsy.
+
+<b>Rectangles must have an ID to be serializable.</b>
+
 ### `static recreate()`
 
 Recreates a saved rectangle given the parent drawing that its DOM node is in.
@@ -696,4 +700,277 @@ var rectangle2 = Rectangle.recreate(savedRectangle, parentDrawing);
 rectangle2.domNode === rectangle1.domNode; // true
 
 rectangle2 === rectangle1; // false
+```
+
+## `class Triangle`
+
+A triangle element.
+
+```javascript
+var triangle = Triangle.create();
+
+// set center coordinates
+triangle.centerX = 10;
+triangle.centerY = 20;
+
+triangle.width = 15;
+triangle.height = 25;
+
+// black stroke
+triangle.domNode.setAttribute('stroke', 'black');
+triangle.domNode.setAttribute('stroke-width', '1');
+
+// white filling
+triangle.domNode.setAttribute('fill', 'white');
+```
+
+### `static create()`
+
+Creates a new triangle from scratch.
+
+```javascript
+var triangle = Triangle.create();
+```
+
+The triangle will be created with a UUID
+and with some default values
+(e.g., width and height, stroke and fill colors).
+
+### `constructor()`
+
+Constructs a new triangle instance wrapping the specified SVG path element.
+
+```javascript
+var domNode = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+var triangle = new Triangle(domNode);
+
+triangle.domNode === domNode; // true
+```
+
+The input SVG path element is not modified in any way by this constructor.
+
+This constructor is more meant for internal use
+(e.g., when recreating saved triangle elements).
+
+### `readonly domNode`
+
+The SVG path element corresponding to the triangle element.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.domNode instanceof SVGPathElement; // true
+```
+
+### `readonly id`
+
+The ID of the triangle.
+
+Is equal to the `id` attribute of the underlying SVG path element.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.domNode.setAttribute('id', 'id-12345');
+
+triangle.id; // "id-12345"
+```
+
+<b>All drawing elements must have a unique ID for RNAcanvas drawings to be savable
+and for undo / redo functionality to work.</b>
+
+Note that the `create()` static method already creates triangles with a UUID.
+
+(IDs should generally not be changed after being initialized.)
+
+### `centerX`
+
+Center X coordinate.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.centerX = 10;
+
+// is stored under the `data-center-x` attribute
+triangle.domNode.dataset.centerX; // "10"
+```
+
+This value is stored under the `data-center-x` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `centerY`
+
+Center Y coordinate.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.centerY = 20;
+
+// is stored under the `data-center-y` attribute
+triangle.domNode.dataset.centerY; // "20"
+```
+
+This value is stored under the `data-center-y` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `drag()`
+
+Move the center coordinates of a triangle by the specified X and Y amounts.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.centerX = 10;
+triangle.centerY = 20;
+
+triangle.drag(5, -2);
+
+triangle.centerX; // 15
+triangle.centerY; // 18
+```
+
+### `direction`
+
+The direction of the triangle (in radians).
+
+```javascript
+var triangle = Triangle.create();
+
+// triangles are created upright by default
+triangle.direction; // -Math.PI / 2
+
+// "pointing" to the left
+triangle.direction = Math.PI;
+
+// "pointing" to the right
+triangle.direction = 0;
+
+// is stored under the `data-direction` attribute
+triangle.domNode.dataset.direction; // "0"
+```
+
+This value is stored under the `data-direction` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `width`
+
+The width of a triangle.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.width = 30;
+
+// is stored under the `data-width` attribute
+triangle.domNode.dataset.width; // "30"
+```
+
+This value is stored under the `data-width` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `height`
+
+The height of a triangle.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.height = 50;
+
+// is stored under the `data-height` attribute
+triangle.domNode.dataset.height; // "50"
+```
+
+This value is stored under the `data-height` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `tailsHeight`
+
+Controls the height between the bottom corners of a triangle
+and the midpoint of its base.
+
+A positive tails height results in a triangle appearing as a "barbed" arrow.
+
+A negative tails height results in a triangle appearing as a diamond arrow.
+
+```javascript
+var triangle = Triangle.create();
+
+triangle.tailsHeight = 5;
+
+// is stored under the `data-tails-height` attribute
+triangle.domNode.dataset.tailsHeight; // "5"
+```
+
+This value is stored under the `data-tails-height` attribute,
+which allows for watching for changes to it using mutation observers.
+
+### `readonly bbox`
+
+The bounding box of a triangle.
+
+<b>Bounding boxes can only be calculated
+when drawing elements have been added to the document body.</b>
+
+```javascript
+var triangle = Triangle.create();
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+svg.append(triangle.domNode);
+
+// add everything to the document body
+document.body.append(svg);
+
+triangle.centerX = 0;
+triangle.centerY = 0;
+
+triangle.width = 10;
+triangle.height = 20;
+
+triangle.bbox.x; // -5
+triangle.bbox.y; // -10
+triangle.bbox.width; // 10
+triangle.bbox.height; // 20
+```
+
+See [Box](https://pzhaojohnson.github.io/rnacanvas.boxes/) class documentation
+for a full list of bounding box methods and properties.
+
+### `serialized()`
+
+Returns the serialized form of a triangle,
+which is a JSON-serializable object.
+
+```javascript
+var triangle = Triangle.create();
+
+var savedTriangle = triangle.serialized();
+```
+
+Throws if the ID of the triangle is falsy.
+
+<b>Triangles must have an ID to be serializable.</b>
+
+### `static recreate()`
+
+Recreates a saved triangle given the parent drawing that its DOM node is in.
+
+```javascript
+var triangle1 = Triangle.create();
+
+var savedTriangle = triangle1.serialized();
+
+// an RNAcanvas drawing
+parentDrawing;
+
+var triangle2 = Triangle.recreate(savedTriangle, parentDrawing);
+
+// share the same DOM node
+triangle2.domNode === triangle1.domNode; // true
+
+triangle2 === triangle1; // false
 ```
