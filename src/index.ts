@@ -6,3 +6,6 @@ export { Circle };
 
 import { Rectangle } from './Rectangle';
 export { Rectangle };
+
+import { Triangle } from './Triangle';
+export { Triangle };
