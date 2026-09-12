@@ -272,11 +272,6 @@ export class Triangle {
       triangle.tailsHeight = savedTriangle.tailsHeight;
     }
 
-    // convert rotation to direction (by subtracting Math.PI / 2)
-    if (isFiniteNumber(savedTriangle.rotation)) {
-      triangle.direction = savedTriangle.rotation - (Math.PI / 2);
-    }
-
     return triangle;
   }
 }

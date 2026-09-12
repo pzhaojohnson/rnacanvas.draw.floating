@@ -428,9 +428,6 @@ describe('`class Rectangle`', () => {
     // corner radius used to be called border radius
     savedRectangle.borderRadius = 4.82;
 
-    // direction used to correspond with rotation
-    savedRectangle.rotation = 3 * Math.PI / 2;
-
     var rectangle2 = Rectangle.recreate(savedRectangle, parentDrawing);
 
     // found DOM node
@@ -444,8 +441,5 @@ describe('`class Rectangle`', () => {
     expect(rectangle2.height).toBe(54.5);
 
     expect(rectangle2.cornerRadius).toBe(4.82);
-
-    // converts rotation to direction (subtracts Math.PI / 2)
-    expect(rectangle2.direction).toBeCloseTo(Math.PI);
   });
 });

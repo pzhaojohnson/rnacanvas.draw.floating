@@ -273,11 +273,6 @@ export class Rectangle {
       rectangle.cornerRadius = savedRectangle.borderRadius;
     }
 
-    // convert rotation to direction (by subtracting Math.PI / 2)
-    if (isFiniteNumber(savedRectangle.rotation)) {
-      rectangle.direction = savedRectangle.rotation - (Math.PI / 2);
-    }
-
     return rectangle;
   }
 }

@@ -427,9 +427,6 @@ describe('`class Triangle`', () => {
 
     savedTriangle.tailsHeight = 4.82;
 
-    // direction used to correspond with rotation
-    savedTriangle.rotation = 3 * Math.PI / 2;
-
     var triangle2 = Triangle.recreate(savedTriangle, parentDrawing);
 
     // found DOM node
@@ -443,8 +440,5 @@ describe('`class Triangle`', () => {
     expect(triangle2.height).toBe(54.5);
 
     expect(triangle2.tailsHeight).toBe(4.82);
-
-    // converts rotation to direction (subtracts Math.PI / 2)
-    expect(triangle2.direction).toBeCloseTo(Math.PI);
   });
 });
