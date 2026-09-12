@@ -12,7 +12,16 @@ All exports of this package can be accessed as named imports.
 
 ```javascript
 // some example imports
-import { Text, Circle, Rectangle, Triangle } from '@rnacanvas/draw.floating';
+import {
+  Text,
+  Circle,
+  Rectangle,
+  Triangle,
+  StrungText,
+  StrungCircle,
+  StrungRectangle,
+  StrungTriangle,
+} from '@rnacanvas/draw.floating';
 ```
 
 ## `class Text`
@@ -973,4 +982,542 @@ var triangle2 = Triangle.recreate(savedTriangle, parentDrawing);
 triangle2.domNode === triangle1.domNode; // true
 
 triangle2 === triangle1; // false
+```
+
+## `class StrungText`
+
+A strung text element.
+
+```javascript
+var owner = someBond;
+
+var strungText = StrungText.on(owner);
+
+strungText.owner === owner; // true
+
+strungText.domNode instanceof SVGTextElement; // true
+```
+
+### `static on()`
+
+Creates a new strung text element for the specified owner.
+
+```javascript
+var owner = someBond;
+
+var strungText = StrungText.on(owner);
+
+strungText.owner === owner; // true
+```
+
+This method creates a new text element under the hood and wraps it in a strung text element.
+
+### `constructor()`
+
+Constructs a strung text element wrapping the specified text element and owner.
+
+```javascript
+var text = Text.create('A');
+
+var owner = someBond;
+
+var strungText = new StrungText(text, owner);
+
+strungText.domNode === text.domNode; // true
+
+strungText.owner === owner; // true
+```
+
+The wrapped text element is not modified in any way during construction.
+
+### `readonly domNode`
+
+The underlying SVG text element corresponding to the strung text element.
+
+```javascript
+var text = Text.create('A');
+
+var owner = someBond;
+
+var strungText = new StrungText(text, owner);
+
+strungText.domNode === text.domNode; // true
+```
+
+### `owner`
+
+The owner of the strung text element.
+
+```javascript
+var owner = someBond;
+
+var strungText = StrungText.on(owner);
+
+strungText.owner === owner; // true
+```
+
+This is typically the bond or other element that the strung item is attached to.
+
+### `textContent`
+
+The text content of the wrapped text element.
+
+```javascript
+var text = Text.create('A');
+
+var owner = someBond;
+
+var strungText = new StrungText(text, owner);
+
+strungText.textContent; // "A"
+
+strungText.domNode.textContent = 'B';
+
+strungText.textContent; // "B"
+```
+
+### `save()`
+
+Returns the serialized form of the strung text element,
+which is a JSON-serializable object.
+
+```javascript
+var owner = someBond;
+
+var strungText = StrungText.on(owner);
+
+var savedStrungText = strungText.save();
+
+savedStrungText.text.id; // has a UUID
+savedStrungText.ownerID; // the owner bond ID
+```
+
+### `static recreate()`
+
+Recreates a saved strung text element given the parent drawing that its DOM node is in.
+
+```javascript
+var owner = someBond;
+
+var strungText1 = StrungText.on(owner);
+
+parentDrawing.domNode.append(strungText1.domNode);
+
+var savedStrungText = strungText1.save();
+
+var strungText2 = StrungText.recreate(savedStrungText, parentDrawing);
+
+strungText2.domNode === strungText1.domNode; // true
+
+strungText2.owner === owner; // true
+
+strungText2 === strungText1; // false
+```
+
+## `class StrungCircle`
+
+A strung circle element.
+
+```javascript
+var owner = someBond;
+
+var strungCircle = StrungCircle.on(owner);
+
+strungCircle.owner === owner; // true
+
+strungCircle.domNode instanceof SVGCircleElement; // true
+```
+
+### `static on()`
+
+Creates a new strung circle element for the specified owner.
+
+```javascript
+var owner = someBond;
+
+var strungCircle = StrungCircle.on(owner);
+
+strungCircle.owner === owner; // true
+```
+
+This method creates a new circle element under the hood and wraps it in a strung circle element.
+
+### `constructor()`
+
+Constructs a strung circle element wrapping the specified circle element and owner.
+
+```javascript
+var circle = Circle.create();
+
+var owner = someBond;
+
+var strungCircle = new StrungCircle(circle, owner);
+
+strungCircle.domNode === circle.domNode; // true
+
+strungCircle.owner === owner; // true
+```
+
+### `readonly domNode`
+
+The underlying SVG circle element corresponding to the strung circle element.
+
+```javascript
+var circle = Circle.create();
+
+var owner = someBond;
+
+var strungCircle = new StrungCircle(circle, owner);
+
+strungCircle.domNode === circle.domNode; // true
+```
+
+### `owner`
+
+The owner of the strung circle element.
+
+```javascript
+var owner = someBond;
+
+var strungCircle = StrungCircle.on(owner);
+
+strungCircle.owner === owner; // true
+```
+
+### `save()`
+
+Returns the serialized form of the strung circle element,
+which is a JSON-serializable object.
+
+```javascript
+var owner = someBond;
+
+var strungCircle = StrungCircle.on(owner);
+
+var savedStrungCircle = strungCircle.save();
+
+savedStrungCircle.circle.id; // has a UUID
+savedStrungCircle.ownerID; // the owner bond ID
+```
+
+### `static recreate()`
+
+Recreates a saved strung circle element given the parent drawing that its DOM node is in.
+
+```javascript
+var owner = someBond;
+
+var strungCircle1 = StrungCircle.on(owner);
+
+parentDrawing.domNode.append(strungCircle1.domNode);
+
+var savedStrungCircle = strungCircle1.save();
+
+var strungCircle2 = StrungCircle.recreate(savedStrungCircle, parentDrawing);
+
+strungCircle2.domNode === strungCircle1.domNode; // true
+
+strungCircle2.owner === owner; // true
+
+strungCircle2 === strungCircle1; // false
+```
+
+## `class StrungRectangle`
+
+A strung rectangle element.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.owner === owner; // true
+
+strungRectangle.domNode instanceof SVGPathElement; // true
+```
+
+### `static on()`
+
+Creates a new strung rectangle element for the specified owner.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.owner === owner; // true
+```
+
+This method creates a new rectangle element under the hood and wraps it in a strung rectangle element.
+
+### `constructor()`
+
+Constructs a strung rectangle element wrapping the specified rectangle element and owner.
+
+```javascript
+var rectangle = Rectangle.create();
+
+var owner = someBond;
+
+var strungRectangle = new StrungRectangle(rectangle, owner);
+
+strungRectangle.domNode === rectangle.domNode; // true
+
+strungRectangle.owner === owner; // true
+```
+
+### `readonly domNode`
+
+The underlying SVG path element corresponding to the strung rectangle element.
+
+```javascript
+var rectangle = Rectangle.create();
+
+var owner = someBond;
+
+var strungRectangle = new StrungRectangle(rectangle, owner);
+
+strungRectangle.domNode === rectangle.domNode; // true
+```
+
+### `owner`
+
+The owner of the strung rectangle element.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.owner === owner; // true
+```
+
+### `width`
+
+The width of the wrapped rectangle element.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.width = 12.4;
+
+strungRectangle.width; // 12.4
+```
+
+### `height`
+
+The height of the wrapped rectangle element.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.height = 18.7;
+
+strungRectangle.height; // 18.7
+```
+
+### `cornerRadius`
+
+Controls how rounded the corners of the wrapped rectangle are.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+strungRectangle.cornerRadius = 8.21;
+
+strungRectangle.cornerRadius; // 8.21
+```
+
+### `save()`
+
+Returns the serialized form of the strung rectangle element,
+which is a JSON-serializable object.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle = StrungRectangle.on(owner);
+
+var savedStrungRectangle = strungRectangle.save();
+
+savedStrungRectangle.rectangle.id; // has a UUID
+savedStrungRectangle.ownerID; // the owner bond ID
+```
+
+### `static recreate()`
+
+Recreates a saved strung rectangle element given the parent drawing that its DOM node is in.
+
+```javascript
+var owner = someBond;
+
+var strungRectangle1 = StrungRectangle.on(owner);
+
+parentDrawing.domNode.append(strungRectangle1.domNode);
+
+var savedStrungRectangle = strungRectangle1.save();
+
+var strungRectangle2 = StrungRectangle.recreate(savedStrungRectangle, parentDrawing);
+
+strungRectangle2.domNode === strungRectangle1.domNode; // true
+
+strungRectangle2.owner === owner; // true
+
+strungRectangle2 === strungRectangle1; // false
+```
+
+## `class StrungTriangle`
+
+A strung triangle element.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.owner === owner; // true
+
+strungTriangle.domNode instanceof SVGPathElement; // true
+```
+
+### `static on()`
+
+Creates a new strung triangle element for the specified owner.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.owner === owner; // true
+```
+
+This method creates a new triangle element under the hood and wraps it in a strung triangle element.
+
+### `constructor()`
+
+Constructs a strung triangle element wrapping the specified triangle element and owner.
+
+```javascript
+var triangle = Triangle.create();
+
+var owner = someBond;
+
+var strungTriangle = new StrungTriangle(triangle, owner);
+
+strungTriangle.domNode === triangle.domNode; // true
+
+strungTriangle.owner === owner; // true
+```
+
+### `readonly domNode`
+
+The underlying SVG path element corresponding to the strung triangle element.
+
+```javascript
+var triangle = Triangle.create();
+
+var owner = someBond;
+
+var strungTriangle = new StrungTriangle(triangle, owner);
+
+strungTriangle.domNode === triangle.domNode; // true
+```
+
+### `owner`
+
+The owner of the strung triangle element.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.owner === owner; // true
+```
+
+### `width`
+
+The width of the wrapped triangle element.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.width = 12.4;
+
+strungTriangle.width; // 12.4
+```
+
+### `height`
+
+The height of the wrapped triangle element.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.height = 18.7;
+
+strungTriangle.height; // 18.7
+```
+
+### `tailsHeight`
+
+Controls the tails height of the wrapped triangle element.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+strungTriangle.tailsHeight = 7.5;
+
+strungTriangle.tailsHeight; // 7.5
+```
+
+### `save()`
+
+Returns the serialized form of the strung triangle element,
+which is a JSON-serializable object.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle = StrungTriangle.on(owner);
+
+var savedStrungTriangle = strungTriangle.save();
+
+savedStrungTriangle.triangle.id; // has a UUID
+savedStrungTriangle.ownerID; // the owner bond ID
+```
+
+### `static recreate()`
+
+Recreates a saved strung triangle element given the parent drawing that its DOM node is in.
+
+```javascript
+var owner = someBond;
+
+var strungTriangle1 = StrungTriangle.on(owner);
+
+parentDrawing.domNode.append(strungTriangle1.domNode);
+
+var savedStrungTriangle = strungTriangle1.save();
+
+var strungTriangle2 = StrungTriangle.recreate(savedStrungTriangle, parentDrawing);
+
+strungTriangle2.domNode === strungTriangle1.domNode; // true
+
+strungTriangle2.owner === owner; // true
+
+strungTriangle2 === strungTriangle1; // false
 ```
