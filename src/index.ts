@@ -21,3 +21,6 @@ export { StrungRectangle };
 
 import { StrungTriangle } from './StrungTriangle';
 export { StrungTriangle };
+
+import { StrungElement } from './StrungElement';
+export { StrungElement };
