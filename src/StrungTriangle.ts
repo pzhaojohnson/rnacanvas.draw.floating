@@ -10,6 +10,8 @@ import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
 
+import { isFiniteNumber } from '@rnacanvas/value-check';
+
 export class StrungTriangle extends StrungElement {
   static on(owner: StrungElementOwner): StrungTriangle {
     let triangle = Triangle.create();
@@ -77,6 +79,11 @@ export class StrungTriangle extends StrungElement {
 
     if (!owner) {
       throw new Error(`Saved strung triangle owner wasn't found in the parent drawing: ${savedStrungTriangle}.`);
+    }
+
+    // rotation used to be saved as an object property
+    if (isFiniteNumber(savedStrungTriangle.rotation)) {
+      triangle.domNode.dataset.rotation = `${savedStrungTriangle.rotation}`;
     }
 
     return new StrungTriangle(triangle, owner);

@@ -133,5 +133,13 @@ describe('`class StrungRectangle`', () => {
     expect(strungRectangle2.owner).toBeTruthy();
 
     expect(strungRectangle2).not.toBe(strungRectangle1);
+
+    // rotation used to be saved as an object property
+    savedStrungRectangle.rotation = Math.PI / 4.5;
+
+    var strungRectangle3 = StrungRectangle.recreate(savedStrungRectangle, parentDrawing);
+
+    // handles legacy rotation property
+    expect(strungRectangle3.domNode.dataset.rotation).toBe(`${Math.PI / 4.5}`);
   });
 });

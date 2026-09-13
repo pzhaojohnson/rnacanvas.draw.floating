@@ -133,5 +133,13 @@ describe('`class StrungTriangle`', () => {
     expect(strungTriangle2.owner).toBeTruthy();
 
     expect(strungTriangle2).not.toBe(strungTriangle1);
+
+    // rotation used to be saved as an object property
+    savedStrungTriangle.rotation = Math.PI / 4.5;
+
+    var strungTriangle3 = StrungTriangle.recreate(savedStrungTriangle, parentDrawing);
+
+    // handles legacy rotation property
+    expect(strungTriangle3.domNode.dataset.rotation).toBe(`${Math.PI / 4.5}`);
   });
 });
