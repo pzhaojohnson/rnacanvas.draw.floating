@@ -30,6 +30,9 @@ describe('`class StrungRectangle`', () => {
 
     expect(strungRectangle.owner).toBe(owner);
     expect(owner).toBeTruthy();
+
+    expect(strungRectangle.lineX).toBe(0);
+    expect(strungRectangle.displacementMagnitude).toBe(0);
   });
 
   test('`domNode`', () => {

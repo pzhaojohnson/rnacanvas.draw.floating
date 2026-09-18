@@ -30,6 +30,9 @@ describe('`class StrungTriangle`', () => {
 
     expect(strungTriangle.owner).toBe(owner);
     expect(owner).toBeTruthy();
+
+    expect(strungTriangle.lineX).toBe(0);
+    expect(strungTriangle.displacementMagnitude).toBe(0);
   });
 
   test('`domNode`', () => {

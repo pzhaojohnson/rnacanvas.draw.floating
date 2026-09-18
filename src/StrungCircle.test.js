@@ -34,6 +34,9 @@ describe('`class StrungCircle`', () => {
 
     expect(strungCircle.owner).toBe(owner);
     expect(owner).toBeTruthy();
+
+    expect(strungCircle.lineX).toBe(0);
+    expect(strungCircle.displacementMagnitude).toBe(0);
   });
 
   test('`domNode`', () => {

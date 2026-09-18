@@ -16,7 +16,13 @@ export class StrungTriangle extends StrungElement {
   static on(owner: StrungElementOwner): StrungTriangle {
     let triangle = Triangle.create();
 
-    return new StrungTriangle(triangle, owner);
+    let strungTriangle = new StrungTriangle(triangle, owner);
+
+    // position the strung triangle element
+    strungTriangle.lineX = 0;
+    strungTriangle.displacementMagnitude = 0;
+
+    return strungTriangle;
   }
 
   /**

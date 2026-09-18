@@ -20,6 +20,14 @@ beforeAll(() => {
   if (!SVGTextElement.prototype.getBBox) {
     SVGTextElement.prototype.getBBox = () => ({ x: 0, y: 0, width: 0, height: 0 });
   }
+
+  if (!SVGTextElement.prototype.x) {
+    SVGTextElement.prototype.x = { baseVal: [{ value: 0 }] };
+  }
+
+  if (!SVGTextElement.prototype.y) {
+    SVGTextElement.prototype.y = { baseVal: [{ value: 0 }] };
+  }
 });
 
 describe('`class StrungText`', () => {
@@ -30,6 +38,9 @@ describe('`class StrungText`', () => {
 
     expect(strungText.owner).toBe(owner);
     expect(owner).toBeTruthy();
+
+    expect(strungText.lineX).toBe(0);
+    expect(strungText.displacementMagnitude).toBe(0);
   });
 
   test('`domNode`', () => {

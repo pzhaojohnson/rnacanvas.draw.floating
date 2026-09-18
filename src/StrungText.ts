@@ -14,7 +14,13 @@ export class StrungText extends StrungElement {
   static on(owner: StrungElementOwner): StrungText {
     let text = Text.create();
 
-    return new StrungText(text, owner);
+    let strungText = new StrungText(text, owner);
+
+    // position the strung text element
+    strungText.lineX = 0;
+    strungText.displacementMagnitude = 0;
+
+    return strungText;
   }
 
   /**

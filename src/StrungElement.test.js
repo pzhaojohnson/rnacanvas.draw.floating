@@ -49,6 +49,14 @@ beforeAll(() => {
     SVGTextElement.prototype.getBBox = () => ({ x: 0, y: 0, width: 0, height: 0 });
   }
 
+  if (!SVGTextElement.prototype.x) {
+    SVGTextElement.prototype.x = { baseVal: [{ value: 0 }] };
+  }
+
+  if (!SVGTextElement.prototype.y) {
+    SVGTextElement.prototype.y = { baseVal: [{ value: 0 }] };
+  }
+
   if (!SVGCircleElement.prototype.cx) {
     SVGCircleElement.prototype.cx = { baseVal: { value: 0 } };
   }

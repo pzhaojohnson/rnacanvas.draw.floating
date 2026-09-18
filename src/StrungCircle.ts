@@ -14,7 +14,13 @@ export class StrungCircle extends StrungElement {
   static on(owner: StrungElementOwner) {
     let circle = Circle.create();
 
-    return new StrungCircle(circle, owner);
+    let strungCircle = new StrungCircle(circle, owner);
+
+    // position the strung circle element
+    strungCircle.lineX = 0;
+    strungCircle.displacementMagnitude = 0;
+
+    return strungCircle;
   }
 
   /**

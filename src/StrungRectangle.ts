@@ -16,7 +16,13 @@ export class StrungRectangle extends StrungElement {
   static on(owner: StrungElementOwner): StrungRectangle {
     let rectangle = Rectangle.create();
 
-    return new StrungRectangle(rectangle, owner);
+    let strungRectangle = new StrungRectangle(rectangle, owner);
+
+    // position the strung rectangle element
+    strungRectangle.lineX = 0;
+    strungRectangle.displacementMagnitude = 0;
+
+    return strungRectangle;
   }
 
   /**
