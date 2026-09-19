@@ -41,6 +41,9 @@ describe('`class StrungText`', () => {
 
     expect(strungText.lineX).toBe(0);
     expect(strungText.displacementMagnitude).toBe(0);
+
+    // gives some text content
+    expect(strungText.domNode.textContent).toBeTruthy();
   });
 
   test('`domNode`', () => {

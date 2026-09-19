@@ -14,6 +14,12 @@ export class StrungText extends StrungElement {
   static on(owner: StrungElementOwner): StrungText {
     let text = Text.create();
 
+    // text elements without text content cannot be positioned properly
+    text.domNode.textContent = 'Text';
+
+    // default font size for strung text elements
+    text.domNode.setAttribute('font-size', '7');
+
     let strungText = new StrungText(text, owner);
 
     // position the strung text element

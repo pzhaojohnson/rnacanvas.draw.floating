@@ -14,6 +14,9 @@ export class StrungCircle extends StrungElement {
   static on(owner: StrungElementOwner) {
     let circle = Circle.create();
 
+    // default radius for strung circles
+    circle.domNode.setAttribute('r', '3');
+
     let strungCircle = new StrungCircle(circle, owner);
 
     // position the strung circle element
