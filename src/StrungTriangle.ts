@@ -12,8 +12,8 @@ import { isString } from '@rnacanvas/value-check';
 
 import { isFiniteNumber } from '@rnacanvas/value-check';
 
-export class StrungTriangle extends StrungElement {
-  static on(owner: StrungElementOwner): StrungTriangle {
+export class StrungTriangle<T extends Triangle, O extends StrungElementOwner> extends StrungElement<T, O> {
+  static on<O extends StrungElementOwner>(owner: O) {
     let triangle = Triangle.create();
 
     let strungTriangle = new StrungTriangle(triangle, owner);
@@ -30,7 +30,7 @@ export class StrungTriangle extends StrungElement {
    */
   readonly #triangle;
 
-  constructor(triangle: Triangle, override readonly owner: StrungElementOwner) {
+  constructor(triangle: T, owner: O) {
     super(triangle, owner);
 
     this.#triangle = triangle;
@@ -68,7 +68,7 @@ export class StrungTriangle extends StrungElement {
     };
   }
 
-  static recreate(savedStrungTriangle: unknown, parentDrawing: Drawing): StrungTriangle | never {
+  static recreate(savedStrungTriangle: unknown, parentDrawing: Drawing) {
     if (!isNonNullObject(savedStrungTriangle)) {
       throw new Error(`Saved strung triangle isn't an object: ${savedStrungTriangle}.`);
     }

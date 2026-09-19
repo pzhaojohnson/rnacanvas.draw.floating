@@ -10,8 +10,8 @@ import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
 
-export class StrungText extends StrungElement {
-  static on(owner: StrungElementOwner): StrungText {
+export class StrungText<T extends Text, O extends StrungElementOwner> extends StrungElement<T, O> {
+  static on<O extends StrungElementOwner>(owner: O) {
     let text = Text.create();
 
     // text elements without text content cannot be positioned properly
@@ -34,7 +34,7 @@ export class StrungText extends StrungElement {
    */
   readonly #text;
 
-  constructor(text: Text, override readonly owner: StrungElementOwner) {
+  constructor(text: T, owner: O) {
     super(text, owner);
 
     this.#text = text;
@@ -52,7 +52,7 @@ export class StrungText extends StrungElement {
     };
   }
 
-  static recreate(savedStrungText: unknown, parentDrawing: Drawing): StrungText | never {
+  static recreate(savedStrungText: unknown, parentDrawing: Drawing) {
     if (!isNonNullObject(savedStrungText)) {
       throw new Error(`Saved strung text isn't an object: ${savedStrungText}.`);
     }

@@ -12,8 +12,8 @@ import { isString } from '@rnacanvas/value-check';
 
 import { isFiniteNumber } from '@rnacanvas/value-check';
 
-export class StrungRectangle extends StrungElement {
-  static on(owner: StrungElementOwner): StrungRectangle {
+export class StrungRectangle<R extends Rectangle, O extends StrungElementOwner> extends StrungElement<R, O> {
+  static on<O extends StrungElementOwner>(owner: O) {
     let rectangle = Rectangle.create();
 
     let strungRectangle = new StrungRectangle(rectangle, owner);
@@ -30,7 +30,7 @@ export class StrungRectangle extends StrungElement {
    */
   readonly #rectangle;
 
-  constructor(rectangle: Rectangle, override readonly owner: StrungElementOwner) {
+  constructor(rectangle: R, owner: O) {
     super(rectangle, owner);
 
     this.#rectangle = rectangle;
@@ -68,7 +68,7 @@ export class StrungRectangle extends StrungElement {
     };
   }
 
-  static recreate(savedStrungRectangle: unknown, parentDrawing: Drawing): StrungRectangle | never {
+  static recreate(savedStrungRectangle: unknown, parentDrawing: Drawing) {
     if (!isNonNullObject(savedStrungRectangle)) {
       throw new Error(`Saved strung rectangle isn't an object: ${savedStrungRectangle}.`);
     }

@@ -10,8 +10,8 @@ import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
 
-export class StrungCircle extends StrungElement {
-  static on(owner: StrungElementOwner) {
+export class StrungCircle<C extends Circle, O extends StrungElementOwner> extends StrungElement<C, O> {
+  static on<O extends StrungElementOwner>(owner: O) {
     let circle = Circle.create();
 
     // default radius for strung circles
@@ -31,7 +31,7 @@ export class StrungCircle extends StrungElement {
    */
   readonly #circle;
 
-  constructor(circle: Circle, override readonly owner: StrungElementOwner) {
+  constructor(circle: C, owner: O) {
     super(circle, owner);
 
     this.#circle = circle;
@@ -45,7 +45,7 @@ export class StrungCircle extends StrungElement {
     };
   }
 
-  static recreate(savedStrungCircle: unknown, parentDrawing: Drawing): StrungCircle | never {
+  static recreate(savedStrungCircle: unknown, parentDrawing: Drawing) {
     if (!isNonNullObject(savedStrungCircle)) {
       throw new Error(`Saved strung circle isn't an object: ${savedStrungCircle}.`);
     }
