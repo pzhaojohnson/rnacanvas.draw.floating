@@ -12,6 +12,6 @@ export interface Drawing {
      *
      * Returns `undefined` if no bonds fulfill the provided callback function.
      */
-    find(f: (bond: StrungElementOwner) => boolean): StrungElementOwner | undefined;
+    find<O extends StrungElementOwner>(f: (bond: O) => boolean): O | undefined;
   }
 }
