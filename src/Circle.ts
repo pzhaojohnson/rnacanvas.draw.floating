@@ -1,5 +1,7 @@
 import type { Drawing } from './Drawing';
 
+import type { StrungElementOwner } from './StrungElementOwner';
+
 import { v4 as uuidv4 } from 'uuid';
 
 import { isNonNullObject } from '@rnacanvas/value-check';
@@ -76,7 +78,7 @@ export class Circle {
   /**
    * Recreates a saved circle given the parent drawing that its DOM node is in.
    */
-  static recreate(savedCircle: unknown, parentDrawing: Drawing): Circle | never {
+  static recreate<O extends StrungElementOwner>(savedCircle: unknown, parentDrawing: Drawing<O>): Circle | never {
     if (!isNonNullObject(savedCircle)) {
       throw new Error(`Saved circle must be an object: ${savedCircle}.`);
     }

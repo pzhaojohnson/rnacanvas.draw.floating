@@ -6,6 +6,8 @@ import { CenterPoint } from '@rnacanvas/draw.svg.text';
 
 import type { Drawing } from './Drawing';
 
+import type { StrungElementOwner } from './StrungElementOwner';
+
 import { isNonNullObject } from '@rnacanvas/value-check';
 
 import { isString } from '@rnacanvas/value-check';
@@ -81,7 +83,7 @@ export class Text {
   /**
    * Recreates a saved text element given the parent drawing that its DOM node is in.
    */
-  static recreate(savedText: unknown, parentDrawing: Drawing): Text | never {
+  static recreate<O extends StrungElementOwner>(savedText: unknown, parentDrawing: Drawing<O>): Text | never {
     if (!isNonNullObject(savedText)) {
       throw new Error(`Saved text element is not an object: ${savedText}.`);
     }

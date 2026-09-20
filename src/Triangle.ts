@@ -2,6 +2,8 @@ import type { Drawing } from './Drawing';
 
 import { TriangleDefinition } from './TriangleDefinition';
 
+import type { StrungElementOwner } from './StrungElementOwner';
+
 import { v4 as uuidv4 } from 'uuid';
 
 import { Box } from '@rnacanvas/boxes';
@@ -238,7 +240,7 @@ export class Triangle {
    *
    * Throws if unable to recreate the saved triangle.
    */
-  static recreate(savedTriangle: unknown, parentDrawing: Drawing): Triangle | never {
+  static recreate<O extends StrungElementOwner>(savedTriangle: unknown, parentDrawing: Drawing<O>): Triangle | never {
     if (!isNonNullObject(savedTriangle)) {
       throw new Error(`Saved triangle is not an object: ${savedTriangle}.`);
     }

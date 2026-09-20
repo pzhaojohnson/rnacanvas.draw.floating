@@ -68,7 +68,7 @@ export class StrungTriangle<T extends Triangle, O extends StrungElementOwner> ex
     };
   }
 
-  static recreate(savedStrungTriangle: unknown, parentDrawing: Drawing) {
+  static recreate<O extends StrungElementOwner>(savedStrungTriangle: unknown, parentDrawing: Drawing<O>) {
     if (!isNonNullObject(savedStrungTriangle)) {
       throw new Error(`Saved strung triangle isn't an object: ${savedStrungTriangle}.`);
     }

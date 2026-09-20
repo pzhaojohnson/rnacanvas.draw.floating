@@ -68,7 +68,7 @@ export class StrungRectangle<R extends Rectangle, O extends StrungElementOwner> 
     };
   }
 
-  static recreate(savedStrungRectangle: unknown, parentDrawing: Drawing) {
+  static recreate<O extends StrungElementOwner>(savedStrungRectangle: unknown, parentDrawing: Drawing<O>) {
     if (!isNonNullObject(savedStrungRectangle)) {
       throw new Error(`Saved strung rectangle isn't an object: ${savedStrungRectangle}.`);
     }

@@ -8,10 +8,12 @@ import { StrungRectangle } from './StrungRectangle';
 
 import { StrungTriangle } from './StrungTriangle';
 
+import type { StrungElementOwner } from './StrungElementOwner';
+
 import { isNonNullObject } from '@rnacanvas/value-check';
 
 export const StrungElement = {
-  recreate: (savedStrungElement: unknown, parentDrawing: Drawing) => {
+  recreate<O extends StrungElementOwner>(savedStrungElement: unknown, parentDrawing: Drawing<O>) {
     if (!isNonNullObject(savedStrungElement)) {
       throw new Error(`Saved strung element isn't an object: ${savedStrungElement}.`);
     }

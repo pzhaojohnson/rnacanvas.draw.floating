@@ -2,6 +2,8 @@ import type { Drawing } from './Drawing';
 
 import { RectangleDefinition } from './RectangleDefinition';
 
+import type { StrungElementOwner } from './StrungElementOwner';
+
 import { v4 as uuidv4 } from 'uuid';
 
 import { Box } from '@rnacanvas/boxes';
@@ -238,7 +240,7 @@ export class Rectangle {
    *
    * Throws if unable to recreate the saved rectangle.
    */
-  static recreate(savedRectangle: unknown, parentDrawing: Drawing): Rectangle | never {
+  static recreate<O extends StrungElementOwner>(savedRectangle: unknown, parentDrawing: Drawing<O>): Rectangle | never {
     if (!isNonNullObject(savedRectangle)) {
       throw new Error(`Saved rectangle is not an object: ${savedRectangle}.`);
     }

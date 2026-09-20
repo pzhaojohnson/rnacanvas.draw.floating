@@ -52,7 +52,7 @@ export class StrungText<T extends Text, O extends StrungElementOwner> extends St
     };
   }
 
-  static recreate(savedStrungText: unknown, parentDrawing: Drawing) {
+  static recreate<O extends StrungElementOwner>(savedStrungText: unknown, parentDrawing: Drawing<O>) {
     if (!isNonNullObject(savedStrungText)) {
       throw new Error(`Saved strung text isn't an object: ${savedStrungText}.`);
     }

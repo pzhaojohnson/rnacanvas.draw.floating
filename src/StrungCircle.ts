@@ -45,7 +45,7 @@ export class StrungCircle<C extends Circle, O extends StrungElementOwner> extend
     };
   }
 
-  static recreate(savedStrungCircle: unknown, parentDrawing: Drawing) {
+  static recreate<O extends StrungElementOwner>(savedStrungCircle: unknown, parentDrawing: Drawing<O>) {
     if (!isNonNullObject(savedStrungCircle)) {
       throw new Error(`Saved strung circle isn't an object: ${savedStrungCircle}.`);
     }

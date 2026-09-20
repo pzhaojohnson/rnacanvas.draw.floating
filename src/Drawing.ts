@@ -3,7 +3,7 @@ import type { StrungElementOwner } from './StrungElementOwner';
 /**
  * The drawing interface used by floating elements.
  */
-export interface Drawing {
+export interface Drawing<O extends StrungElementOwner> {
   readonly domNode: SVGSVGElement;
 
   readonly bonds: {
@@ -12,6 +12,6 @@ export interface Drawing {
      *
      * Returns `undefined` if no bonds fulfill the provided callback function.
      */
-    find<O extends StrungElementOwner>(f: (bond: O) => boolean): O | undefined;
+    find(f: (bond: O) => boolean): O | undefined;
   }
 }
