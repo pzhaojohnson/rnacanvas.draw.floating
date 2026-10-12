@@ -262,17 +262,18 @@ export class Rectangle {
     let rectangle = new Rectangle(domNode);
 
     // some properties used to be saved as JSON object properties
+    // (set SVG dataset directly to avoid repositioning the rectangle)
     if (isFiniteNumber(savedRectangle.width)) {
-      rectangle.width = savedRectangle.width;
+      rectangle.domNode.dataset.width = `${savedRectangle.width}`;
     }
 
     if (isFiniteNumber(savedRectangle.height)) {
-      rectangle.height = savedRectangle.height;
+      rectangle.domNode.dataset.height = `${savedRectangle.height}`;
     }
 
     // corner radius used to be called border radius
     if (isFiniteNumber(savedRectangle.borderRadius)) {
-      rectangle.cornerRadius = savedRectangle.borderRadius;
+      rectangle.domNode.dataset.cornerRadius = `${savedRectangle.borderRadius}`;
     }
 
     return rectangle;

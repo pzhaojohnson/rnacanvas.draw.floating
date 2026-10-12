@@ -262,16 +262,17 @@ export class Triangle {
     let triangle = new Triangle(domNode);
 
     // some properties used to be saved as JSON object properties
+    // (set SVG dataset directly to avoid repositioning the triangle)
     if (isFiniteNumber(savedTriangle.width)) {
-      triangle.width = savedTriangle.width;
+      triangle.domNode.dataset.width = `${savedTriangle.width}`;
     }
 
     if (isFiniteNumber(savedTriangle.height)) {
-      triangle.height = savedTriangle.height;
+      triangle.domNode.dataset.height = `${savedTriangle.height}`;
     }
 
     if (isFiniteNumber(savedTriangle.tailsHeight)) {
-      triangle.tailsHeight = savedTriangle.tailsHeight;
+      triangle.domNode.dataset.tailsHeight = `${savedTriangle.tailsHeight}`;
     }
 
     return triangle;
