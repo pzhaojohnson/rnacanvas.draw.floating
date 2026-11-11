@@ -1076,7 +1076,7 @@ strungText.domNode.textContent = 'B';
 strungText.textContent; // "B"
 ```
 
-### `save()`
+### `serialized()`
 
 Returns the serialized form of the strung text element,
 which is a JSON-serializable object.
@@ -1086,7 +1086,7 @@ var owner = someBond;
 
 var strungText = StrungText.on(owner);
 
-var savedStrungText = strungText.save();
+var savedStrungText = strungText.serialized();
 
 savedStrungText.text.id; // has a UUID
 savedStrungText.ownerID; // the owner bond ID
@@ -1103,7 +1103,7 @@ var strungText1 = StrungText.on(owner);
 
 parentDrawing.domNode.append(strungText1.domNode);
 
-var savedStrungText = strungText1.save();
+var savedStrungText = strungText1.serialized();
 
 var strungText2 = StrungText.recreate(savedStrungText, parentDrawing);
 
@@ -1184,7 +1184,7 @@ var strungCircle = StrungCircle.on(owner);
 strungCircle.owner === owner; // true
 ```
 
-### `save()`
+### `serialized()`
 
 Returns the serialized form of the strung circle element,
 which is a JSON-serializable object.
@@ -1194,7 +1194,7 @@ var owner = someBond;
 
 var strungCircle = StrungCircle.on(owner);
 
-var savedStrungCircle = strungCircle.save();
+var savedStrungCircle = strungCircle.serialized();
 
 savedStrungCircle.circle.id; // has a UUID
 savedStrungCircle.ownerID; // the owner bond ID
@@ -1211,7 +1211,7 @@ var strungCircle1 = StrungCircle.on(owner);
 
 parentDrawing.domNode.append(strungCircle1.domNode);
 
-var savedStrungCircle = strungCircle1.save();
+var savedStrungCircle = strungCircle1.serialized();
 
 var strungCircle2 = StrungCircle.recreate(savedStrungCircle, parentDrawing);
 
@@ -1334,7 +1334,7 @@ strungRectangle.cornerRadius = 8.21;
 strungRectangle.cornerRadius; // 8.21
 ```
 
-### `save()`
+### `serialized()`
 
 Returns the serialized form of the strung rectangle element,
 which is a JSON-serializable object.
@@ -1344,7 +1344,7 @@ var owner = someBond;
 
 var strungRectangle = StrungRectangle.on(owner);
 
-var savedStrungRectangle = strungRectangle.save();
+var savedStrungRectangle = strungRectangle.serialized();
 
 savedStrungRectangle.rectangle.id; // has a UUID
 savedStrungRectangle.ownerID; // the owner bond ID
@@ -1361,7 +1361,7 @@ var strungRectangle1 = StrungRectangle.on(owner);
 
 parentDrawing.domNode.append(strungRectangle1.domNode);
 
-var savedStrungRectangle = strungRectangle1.save();
+var savedStrungRectangle = strungRectangle1.serialized();
 
 var strungRectangle2 = StrungRectangle.recreate(savedStrungRectangle, parentDrawing);
 
@@ -1484,7 +1484,7 @@ strungTriangle.tailsHeight = 7.5;
 strungTriangle.tailsHeight; // 7.5
 ```
 
-### `save()`
+### `serialized()`
 
 Returns the serialized form of the strung triangle element,
 which is a JSON-serializable object.
@@ -1494,7 +1494,7 @@ var owner = someBond;
 
 var strungTriangle = StrungTriangle.on(owner);
 
-var savedStrungTriangle = strungTriangle.save();
+var savedStrungTriangle = strungTriangle.serialized();
 
 savedStrungTriangle.triangle.id; // has a UUID
 savedStrungTriangle.ownerID; // the owner bond ID
@@ -1511,7 +1511,7 @@ var strungTriangle1 = StrungTriangle.on(owner);
 
 parentDrawing.domNode.append(strungTriangle1.domNode);
 
-var savedStrungTriangle = strungTriangle1.save();
+var savedStrungTriangle = strungTriangle1.serialized();
 
 var strungTriangle2 = StrungTriangle.recreate(savedStrungTriangle, parentDrawing);
 

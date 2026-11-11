@@ -86,7 +86,7 @@ describe('`class StrungElement`', () => {
 
     parentDrawing1.domNode.append(strungText1.domNode);
 
-    var savedStrungText = strungText1.save();
+    var savedStrungText = strungText1.serialized();
 
     var strungText2 = StrungElement.recreate(savedStrungText, parentDrawing1);
 
@@ -113,7 +113,7 @@ describe('`class StrungElement`', () => {
 
     parentDrawing2.domNode.append(strungCircle1.domNode);
 
-    var savedStrungCircle = strungCircle1.save();
+    var savedStrungCircle = strungCircle1.serialized();
 
     var strungCircle2 = StrungElement.recreate(savedStrungCircle, parentDrawing2);
 
@@ -140,7 +140,7 @@ describe('`class StrungElement`', () => {
 
     parentDrawing3.domNode.append(strungRectangle1.domNode);
 
-    var savedStrungRectangle = strungRectangle1.save();
+    var savedStrungRectangle = strungRectangle1.serialized();
 
     var strungRectangle2 = StrungElement.recreate(savedStrungRectangle, parentDrawing3);
 
@@ -167,7 +167,7 @@ describe('`class StrungElement`', () => {
 
     parentDrawing4.domNode.append(strungTriangle1.domNode);
 
-    var savedStrungTriangle = strungTriangle1.save();
+    var savedStrungTriangle = strungTriangle1.serialized();
 
     var strungTriangle2 = StrungElement.recreate(savedStrungTriangle, parentDrawing4);
 

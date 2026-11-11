@@ -60,7 +60,7 @@ export class StrungRectangle<R extends Rectangle, O extends StrungElementOwner> 
     this.#rectangle.cornerRadius = cornerRadius;
   }
 
-  save() {
+  serialized() {
     return {
       rectangle: this.#rectangle.serialized(),
 

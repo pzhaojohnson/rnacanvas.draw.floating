@@ -55,15 +55,15 @@ describe('`class StrungRectangle`', () => {
     expect(strungRectangle.owner).toBeTruthy();
   });
 
-  test('`save()`', () => {
+  test('`serialized()`', () => {
     var owner = new BondMock(new NucleobaseMock(), new NucleobaseMock());
 
     var strungRectangle = StrungRectangle.on(owner);
 
-    expect(strungRectangle.save().rectangle.id).toBeTruthy();
+    expect(strungRectangle.serialized().rectangle.id).toBeTruthy();
 
-    expect(strungRectangle.save().ownerID).toBe(owner.id);
-    expect(strungRectangle.save().ownerID).toBeTruthy();
+    expect(strungRectangle.serialized().ownerID).toBe(owner.id);
+    expect(strungRectangle.serialized().ownerID).toBeTruthy();
   });
 
   test('`width`', () => {
@@ -125,7 +125,7 @@ describe('`class StrungRectangle`', () => {
 
     parentDrawing.domNode.append(strungRectangle1.domNode);
 
-    var savedStrungRectangle = strungRectangle1.save();
+    var savedStrungRectangle = strungRectangle1.serialized();
 
     var strungRectangle2 = StrungRectangle.recreate(savedStrungRectangle, parentDrawing);
 

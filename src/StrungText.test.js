@@ -66,15 +66,15 @@ describe('`class StrungText`', () => {
     expect(strungText.owner).toBeTruthy();
   });
 
-  test('`save()`', () => {
+  test('`serialized()`', () => {
     var owner = new BondMock(new NucleobaseMock(), new NucleobaseMock());
 
     var strungText = StrungText.on(owner);
 
-    expect(strungText.save().text.id).toBeTruthy();
+    expect(strungText.serialized().text.id).toBeTruthy();
 
-    expect(strungText.save().ownerID).toBe(owner.id);
-    expect(strungText.save().ownerID).toBeTruthy();
+    expect(strungText.serialized().ownerID).toBe(owner.id);
+    expect(strungText.serialized().ownerID).toBeTruthy();
   });
 
   test('`recreate()`', () => {
@@ -92,7 +92,7 @@ describe('`class StrungText`', () => {
 
     parentDrawing.domNode.append(strungText1.domNode);
 
-    var savedStrungText = strungText1.save();
+    var savedStrungText = strungText1.serialized();
 
     var strungText2 = StrungText.recreate(savedStrungText, parentDrawing);
 

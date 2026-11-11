@@ -44,7 +44,7 @@ export class StrungText<T extends Text, O extends StrungElementOwner> extends St
     return this.domNode.textContent;
   }
 
-  save() {
+  serialized() {
     return {
       text: this.#text.serialized(),
 

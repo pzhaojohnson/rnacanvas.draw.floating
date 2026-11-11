@@ -37,7 +37,7 @@ export class StrungCircle<C extends Circle, O extends StrungElementOwner> extend
     this.#circle = circle;
   }
 
-  save() {
+  serialized() {
     return {
       circle: this.#circle.serialized(),
 

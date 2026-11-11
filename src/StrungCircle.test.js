@@ -59,15 +59,15 @@ describe('`class StrungCircle`', () => {
     expect(strungCircle.owner).toBeTruthy();
   });
 
-  test('`save()`', () => {
+  test('`serialized()`', () => {
     var owner = new BondMock(new NucleobaseMock(), new NucleobaseMock());
 
     var strungCircle = StrungCircle.on(owner);
 
-    expect(strungCircle.save().circle.id).toBeTruthy();
+    expect(strungCircle.serialized().circle.id).toBeTruthy();
 
-    expect(strungCircle.save().ownerID).toBe(owner.id);
-    expect(strungCircle.save().ownerID).toBeTruthy();
+    expect(strungCircle.serialized().ownerID).toBe(owner.id);
+    expect(strungCircle.serialized().ownerID).toBeTruthy();
   });
 
   test('`recreate()`', () => {
@@ -86,7 +86,7 @@ describe('`class StrungCircle`', () => {
 
     parentDrawing.domNode.append(strungCircle1.domNode);
 
-    var savedStrungCircle = strungCircle1.save();
+    var savedStrungCircle = strungCircle1.serialized();
 
     var strungCircle2 = StrungCircle.recreate(savedStrungCircle, parentDrawing);
 

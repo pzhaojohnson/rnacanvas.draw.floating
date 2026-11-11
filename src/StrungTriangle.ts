@@ -60,7 +60,7 @@ export class StrungTriangle<T extends Triangle, O extends StrungElementOwner> ex
     this.#triangle.tailsHeight = tailsHeight;
   }
 
-  save() {
+  serialized() {
     return {
       triangle: this.#triangle.serialized(),
 
